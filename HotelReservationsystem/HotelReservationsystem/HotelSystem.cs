@@ -17,10 +17,10 @@ namespace HotelReservationsystem
         {
             hotelList.Add(hotel);
         }
-        public Hotel GetCheapestHotel(string[] enteredDates)
+        public Hotel GetCheapestHotel(string[] dates)
         {
-            DateTime[] dates = dateValidation.ValidateDates(enteredDates);
-            hotelList.Sort((e1, e2) => e1.ratesForRegularCustomer.CompareTo(e2.ratesForRegularCustomer));
+            DateTime[] validatedDates = dateValidation.ValidateAndReturnDates(dates);
+            hotelList.Sort((e1, e2) => e1.weekdayRatesForRegularCustomer.CompareTo(e2.weekdayRatesForRegularCustomer));
             return hotelList.First();
         }
     }
