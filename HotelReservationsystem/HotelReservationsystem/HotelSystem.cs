@@ -70,6 +70,5 @@ namespace HotelReservationsystem
             }
             Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
         }
-
     }
 }

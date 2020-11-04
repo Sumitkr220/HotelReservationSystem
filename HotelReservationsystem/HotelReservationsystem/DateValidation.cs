@@ -36,5 +36,6 @@ namespace HotelReservationsystem
                 throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE_FORMAT, "Date Format is Invalid");
             }
         }
+
     }
 }
