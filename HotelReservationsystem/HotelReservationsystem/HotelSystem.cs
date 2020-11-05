@@ -52,6 +52,15 @@ namespace HotelReservationsystem
             int highestRating = cheapestHotels.Last().rating;
             return cheapestHotels.FindAll(e => e.rating == highestRating);
         }
+        public List<Hotel> GetBestRatedHotel(string[] dates)
+        {
+            DateTime[] validatedDates = dateValidation.ValidateAndReturnDates(dates);
+            SetWeekendsAndWeekdays(validatedDates);
+
+            hotelList.Sort((e1, e2) => e1.rating.CompareTo(e2.rating));
+            int highestRating = hotelList.Last().rating;
+            return hotelList.FindAll(e => e.rating == highestRating);
+        }
         public int CalculateTotalRate(Hotel hotel)
         {
             return (weekday * hotel.weekdayRatesForRegularCustomer) + (weekend * hotel.weekendRatesForRegularCustomer);
@@ -69,13 +78,15 @@ namespace HotelReservationsystem
                     weekday++;
             }
         }
-        public void DisplayHotels(Hotel[] hotels)
+        public void DisplayHotels(List<Hotel> hotels)
         {
-            for (int i = 1; i <= hotels.Length; i++)
+            int i = 1;
+            Console.WriteLine("Hotels");
+            foreach (Hotel hotel in hotels)
             {
-                Console.WriteLine(i + ". " + hotels[i - 1].name);
+                Console.WriteLine(i + ". " + hotel.name + "\tRating :" + hotel.rating + "\tTotal Rate :" + CalculateTotalRate(hotel));
+                i++;
             }
-            Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
         }
     }
 }
