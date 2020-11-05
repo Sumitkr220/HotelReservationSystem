@@ -45,6 +45,13 @@ namespace HotelReservationsystem
             }
             return cheapestHotels;
         }
+        public List<Hotel> GetCheapestBestRatedHotel(string[] dates)
+        {
+            List<Hotel> cheapestHotels = GetCheapestHotel(dates);
+            cheapestHotels.Sort((e1, e2) => e1.rating.CompareTo(e2.rating));
+            int highestRating = cheapestHotels.Last().rating;
+            return cheapestHotels.FindAll(e => e.rating == highestRating);
+        }
         public int CalculateTotalRate(Hotel hotel)
         {
             return (weekday * hotel.weekdayRatesForRegularCustomer) + (weekend * hotel.weekendRatesForRegularCustomer);
